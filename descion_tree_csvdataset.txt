@@ -1,0 +1,23 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+
+# Load the dataset
+data = pd.read_csv("Credit.csv")
+
+# Drop the 'Unnamed: 0' column as it's just an index
+data = data.drop(columns=['Unnamed: 0'])
+
+# Use One-Hot Encoding to convert categorical columns into numerical columns
+data = pd.get_dummies(data, drop_first=True)
+
+# Separate features (X) and target (y)
+X = data.drop(columns='Balance')  # Features
+y = data['Balance']  # Target column
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Initialize and train the Decision Tree model
+dt_model = DecisionTr…
